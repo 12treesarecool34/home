@@ -7,7 +7,7 @@
 <p1></p>
 <a href="https://thefuncoder12.github.io/retrobowlcollege">Retro Bowl College</a>
 <p1></p>
-<a href="https://thefuncoder12.github.io/poorbunny/classic/poor-bunny-og.html">Poor Bunny</a>
+<a href="https://thefuncoder12.github.io/poorbunny">Poor Bunny</a>
 <p1></p>
 <a href="https://thefuncoder12.github.io/cookieclicker">Cookie Clicker</a>
 <p1></p>
