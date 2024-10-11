@@ -12,5 +12,3 @@
 <a href="https://thefuncoder12.github.io/cookieclicker">Cookie Clicker</a>
 <p1></p>
 <a href="https://thefuncoder12.github.io/bitlife">BitLife</a>
-</body>
-</html>
