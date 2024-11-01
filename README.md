@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Games - 12grassiscool34</title>
 <link rel="icon" type="image/png" href="./favicon.png">
 </head>
 <body>
