@@ -3,6 +3,15 @@
 <head>
 <title>Home - 12grassiscool34</title>
 <link rel="icon" type="image/png" href="./Favicon_Circle.png">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    a {
+        color: #0000CD; /* Medium blue */
+    }
+</style>
 </head>
 <body>
 <h1>12grassiscool34: Home</h1>
