@@ -7,31 +7,100 @@
 <style>
     body {
         font-family: 'Roboto', sans-serif;
-        background-color: white;
-        color: black;
+        background-color: #f4f4f4;
+        color: #333;
         text-align: center;
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.5s, color 0.5s;
+        overflow-x: hidden;
     }
     .dark-mode {
-        background-color: black;
+        background-color: #333;
+        color: #f4f4f4;
+    }
+    header {
+        background-color: #444;
         color: white;
+        padding: 10px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: slideDown 1s ease-in-out;
+    }
+    h1 {
+        margin: 0;
+        font-size: 2.5em;
+        animation: fadeIn 1s ease-in-out;
+    }
+    h3 {
+        margin: 10px 0 20px;
+        font-size: 1.2em;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+    .container {
+        padding: 20px;
     }
     a {
-        color: blue;
+        color: #1a73e8;
+        text-decoration: none;
+        font-weight: bold;
+        display: block;
+        margin: 10px 0;
+        transition: color 0.3s, transform 0.3s, opacity 0.3s;
+        animation: fadeInLeft 1s ease-in-out;
+    }
+    a:hover {
+        text-decoration: underline;
+        color: #0d47a1;
+        transform: translateX(10px);
+        opacity: 0.8;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-family: 'Roboto', sans-serif;
+        transition: background-color 0.3s, transform 0.3s;
+        animation: fadeIn 2s ease-in-out;
+    }
+    button:hover {
+        background-color: #0d47a1;
+        transform: scale(1.05);
+    }
+    .dark-mode a {
+        color: #4a90e2;
+    }
+    .dark-mode a:hover {
+        color: #ffffff;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slideDown {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInLeft {
+        from { transform: translateX(-20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
 </style>
 </head>
 <body>
-<h1>Grass Home</h1>
-<h3>This is the homepage for my site.</h3>
-<button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-<p></p>
-<p1>Here are some of the things I have been working on:</p>
-<a href="https://12grassiscool34.github.io/games">Grass Games</a><p1> - You can find fun, unblocked games here!</p>
-<p1></p>
-<a href="https://12grassiscool34.github.io/loading-html-page">Loading HTML Page</a><p1> - Simple HTML loading animations.</p>
-<p1></p>
-<a href="https://12grassiscool34.github.io/simple-clock">Simple Clock</a><p1> - Simple clock made with HTML, CSS and JS.</p>
-<p1></p>
+<header>
+    <h1>Grass Home</h1>
+    <h3>This is the homepage for my site.</h3>
+</header>
+<div class="container">
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <p></p>
+    <a href="https://12grassiscool34.github.io/games">Grass Games</a>
+    <a href="https://12grassiscool34.github.io/loading-html-page">Loading HTML Page</a>
+    <a href="https://12grassiscool34.github.io/simple-clock">Simple Clock</a>
+</div>
 <script>
 function toggleDarkMode() {
     var element = document.body;
