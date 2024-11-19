@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tree Home</title>
     <link rel="icon" type="image/png" href="./Favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -108,6 +109,12 @@
             var element = document.body;
             element.classList.toggle("dark-mode");
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add("dark-mode");
+            }
+        });
     </script>
 </body>
 </html>
