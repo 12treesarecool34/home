@@ -191,14 +191,19 @@
 
             Notification.requestPermission().then(permission => {
                 if (permission === "granted") {
-                    checkForUpdates();
-                    setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
+                    setTimeout(() => {
+                        localStorage.setItem('cooldownComplete', 'true');
+                        checkForUpdates();
+                        setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
+                    }, 10000); // 10-second cooldown
                 } else {
                     window.location.href = "./error";
                 }
             });
 
-            setInterval(checkNotificationPermission, 500); // Check notification permission every 0.5 seconds
+            if (localStorage.getItem('cooldownComplete')) {
+                setInterval(checkNotificationPermission, 500); // Check notification permission every 0.5 seconds
+            }
         });
     </script>
 </body>
