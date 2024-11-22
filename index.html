@@ -155,8 +155,6 @@
                     const notification = new Notification(title, { body: body });
                     console.log('Notification sent:', title, body);
                     localStorage.setItem('latestNotification', currentNotification);
-                } else {
-                    document.body.innerHTML = '';
                 }
             } else {
                 console.log('No new notification needed.');
@@ -196,15 +194,13 @@
                         localStorage.setItem('cooldownComplete', 'true');
                     }, 10000);
                     setInterval(checkForUpdates, 5000);
-                } else {
-                    document.body.innerHTML = '';
                 }
             });
 
             if (localStorage.getItem('cooldownComplete')) {
                 setInterval(() => {
                     if (Notification.permission !== "granted") {
-                        document.body.innerHTML = '';
+                        console.log('Notification permission not granted.');
                     }
                 }, 500);
             }
