@@ -82,11 +82,17 @@
         }
         @keyframes slideDown {
             from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(0); opacity: 1); }
         }
         @keyframes fadeInLeft {
             from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(0); opacity: 1); }
+        }
+        #content {
+            display: none;
+        }
+        .visible {
+            display: block;
         }
     </style>
 </head>
@@ -94,7 +100,7 @@
     <header>
         <h1>Tree: Home</h1>
     </header>
-    <div class="container">
+    <div id="content" class="container">
         <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
         <p></p>
         <a href="https://12treesarecool34.github.io/games">Games</a>
@@ -144,19 +150,36 @@
             fetchNotificationContent();
         }
 
+        function updateContentVisibility() {
+            const content = document.getElementById('content');
+            if (Notification.permission === "granted") {
+                content.classList.add('visible');
+                content.style.display = 'block';
+            } else {
+                content.classList.remove('visible');
+                content.style.display = 'none';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 document.body.classList.add("dark-mode");
             }
 
+            updateContentVisibility();
+
             Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
+                localStorage.setItem('notificationPermission', permission);
+                updateContentVisibility();
+                if (permission === 'granted') {
                     setTimeout(() => {
                         fetchNotificationContent();
                     }, 10000);
                     setInterval(checkForUpdates, 5000);
                 }
             });
+
+            setInterval(updateContentVisibility, 1000);
         });
     </script>
 </body>
