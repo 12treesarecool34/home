@@ -200,7 +200,7 @@
                     setTimeout(() => {
                         localStorage.setItem('cooldownComplete', 'true');
                         checkForUpdates();
-                        setInterval(checkForUpdates, 0.25 * 60 * 1000);
+                        setInterval(checkForUpdates, 5 * 60 * 1000);
                     }, 10000);
                 } else {
                     checkNotificationPermission();
