@@ -43,6 +43,12 @@
             animation: fadeIn 1.5s ease-in-out;
         }
 
+        p {
+            margin: 10px 0 20px;
+            font-size: 1em;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
         .container {
             padding: 20px;
         }
@@ -128,7 +134,6 @@
 <body>
     <header>
         <h1>Tree: Home</h1>
-        <h3>Just some GitHub stuff.</h3>
     </header>
     <div class="container">
         <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
@@ -136,7 +141,7 @@
         <a href="https://12treesarecool34.github.io/games">Games</a>
         <a href="https://12treesarecool34.github.io/hideurl">HideURL</a>
         <a href="https://12treesarecool34.github.io/clock">Clock</a>
-        <a href="https://12treesarecool34.github.io/updates">Updates</a>
+        <a href="https://12treesarecool34.github.io/notify">Notify</a>
     </div>
     <script>
         function toggleDarkMode() {
@@ -144,28 +149,15 @@
             element.classList.toggle("dark-mode");
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.body.classList.add("dark-mode");
-            }
-        });
-
         function notifyUser(title, body) {
             if (Notification.permission === "granted") {
-                const notification = new Notification(title, {
-                    body: body,
-                    requireInteraction: true // Ensures the notification remains until clicked
-                });
-
-                notification.onclick = () => {
-                    window.open("https://12treesarecool34.github.io/updates");
-                };
+                new Notification(title, { body: body });
             }
         }
 
-        async function fetchUpdates() {
+        async function checkForUpdates() {
             try {
-                const response = await fetch('https://12treesarecool34.github.io/updates');
+                const response = await fetch('https://12treesarecool34.github.io/notify');
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -185,19 +177,35 @@
                     }
                 }
             } catch (error) {
-                console.error('Failed to fetch updates:', error);
+                console.error('Failed to check for updates:', error);
+            }
+        }
+
+        function checkNotificationPermission() {
+            if (Notification.permission !== "granted") {
+                window.location.href = "./error";
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            if (Notification.permission === "granted") {
-                fetchUpdates();
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        fetchUpdates();
-                    }
-                });
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add("dark-mode");
+            }
+
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    setTimeout(() => {
+                        localStorage.setItem('cooldownComplete', 'true');
+                        checkForUpdates();
+                        setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
+                    }, 10000); // 10-second cooldown
+                } else {
+                    window.location.href = "./error";
+                }
+            });
+
+            if (localStorage.getItem('cooldownComplete')) {
+                setInterval(checkNotificationPermission, 500); // Check notification permission every 0.5 seconds
             }
         });
     </script>
