@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home - Tree</title>
@@ -128,13 +127,8 @@
                 opacity: 1;
             }
         }
-
-        iframe {
-            display: none;
-        }
     </style>
 </head>
-
 <body>
     <header>
         <h1>Tree: Home</h1>
@@ -147,7 +141,6 @@
         <a href="https://12treesarecool34.github.io/clock">Clock</a>
         <a href="https://12treesarecool34.github.io/notify">Notify</a>
     </div>
-    <iframe src="https://12treesarecool34.github.io/notify" id="hiddenFrame" name="hiddenFrame"></iframe>
     <script>
         function toggleDarkMode() {
             var element = document.body;
@@ -156,47 +149,20 @@
 
         function notifyUser(title, body) {
             if (Notification.permission === "granted") {
-                const notification = new Notification(title, { body: body });
-                notification.onclick = () => {
-                    window.open('https://12treesarecool34.github.io/notify', '_blank');
-                };
-                console.log('Notification sent:', title, body);
-            }
-        }
+                const previousNotification = localStorage.getItem('latestNotification');
+                const currentNotification = `${title} - ${body}`;
 
-        async function checkForUpdates() {
-            try {
-                const response = await fetch('https://12treesarecool34.github.io/notify');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const h3Element = doc.querySelector('.container h3');
-                const pElement = h3Element ? h3Element.nextElementSibling : null;
-
-                if (h3Element && pElement) {
-                    const newUpdate = `${h3Element.textContent} - ${pElement.textContent}`;
-                    const previousUpdate = localStorage.getItem('latestUpdate');
-
-                    console.log('Previous update:', previousUpdate);
-                    console.log('New update:', newUpdate);
-
-                    if (newUpdate !== previousUpdate) {
-                        notifyUser(h3Element.textContent, pElement.textContent);
-                        localStorage.setItem('latestUpdate', newUpdate);
-                    }
+                if (previousNotification !== currentNotification) {
+                    const notification = new Notification(title, { body: body });
+                    notification.onclick = () => {
+                        window.open('https://12treesarecool34.github.io/notify', '_blank');
+                    };
+                    console.log('Notification sent:', title, body);
+                    localStorage.setItem('latestNotification', currentNotification);
                 } else {
-                    console.log('h3Element or pElement not found');
+                    console.log('Notification not sent, no changes detected');
                 }
-            } catch (error) {
-                console.error('Failed to check for updates:', error);
-            }
-        }
-
-        function checkNotificationPermission() {
-            if (Notification.permission !== "granted") {
+            } else {
                 document.body.innerHTML = '';
             }
         }
@@ -209,26 +175,21 @@
             Notification.requestPermission().then(permission => {
                 if (permission === "granted") {
                     setTimeout(() => {
-                        localStorage.setItem('cooldownComplete', 'true');
-                        checkForUpdates();
-                        setInterval(checkForUpdates, 0.5 * 60 * 1000);
-                    }, 10000);
+                        notifyUser("Title", "Text");
+                    }, 5000);
                 } else {
-                    checkNotificationPermission();
+                    document.body.innerHTML = '';
                 }
             });
 
             if (localStorage.getItem('cooldownComplete')) {
-                setInterval(checkNotificationPermission, 500);
+                setInterval(() => {
+                    if (Notification.permission !== "granted") {
+                        document.body.innerHTML = '';
+                    }
+                }, 500);
             }
-
-            setInterval(() => {
-                let iframe = document.getElementById('hiddenFrame');
-                iframe.src = 'https://12treesarecool34.github.io/notify?' + new Date().getTime();
-                console.log('Iframe reloaded with cache-busting');
-            }, 0.5 * 60 * 1000);
         });
     </script>
 </body>
-
 </html>
