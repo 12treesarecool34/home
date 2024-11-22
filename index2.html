@@ -190,16 +190,14 @@
                 window.location.href = "./error";
             }
 
-            if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        checkForUpdates();
-                        setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
-                    } else {
-                        window.location.href = "./error";
-                    }
-                });
-            }
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    checkForUpdates();
+                    setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
+                } else {
+                    window.location.href = "./error";
+                }
+            });
         });
     </script>
 </body>
