@@ -185,12 +185,16 @@
 
             if (Notification.permission === "granted") {
                 checkForUpdates();
-                setInterval(checkForUpdates, 5 * 60 * 1000);
-            } else if (Notification.permission !== "denied") {
+                setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
+            } else if (Notification.permission === "denied") {
+                window.location.href = "./error";
+            } else {
                 Notification.requestPermission().then(permission => {
                     if (permission === "granted") {
                         checkForUpdates();
-                        setInterval(checkForUpdates, 5 * 60 * 1000);
+                        setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
+                    } else if (permission === "denied") {
+                        window.location.href = "./error";
                     }
                 });
             }
