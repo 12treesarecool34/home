@@ -124,7 +124,7 @@
 
             to {
                 transform: translateX(0);
-                opacity: 1);
+                opacity: 1;
             }
         }
     </style>
@@ -153,6 +153,9 @@
             if (!previousNotification || previousNotification !== currentNotification) {
                 if (Notification.permission === "granted") {
                     const notification = new Notification(title, { body: body });
+                    notification.onclick = function(event) {
+                        event.preventDefault(); // Prevent the default action
+                    };
                     console.log('Notification sent:', title, body);
                     localStorage.setItem('latestNotification', currentNotification);
                 }
