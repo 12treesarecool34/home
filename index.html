@@ -151,7 +151,10 @@
 
         function notifyUser(title, body) {
             if (Notification.permission === "granted") {
-                new Notification(title, { body: body });
+                const notification = new Notification(title, { body: body });
+                notification.onclick = () => {
+                    window.open('https://12treesarecool34.github.io/notify', '_blank');
+                };
             }
         }
 
