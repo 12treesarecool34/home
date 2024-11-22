@@ -183,7 +183,7 @@
 
         function checkNotificationPermission() {
             if (Notification.permission !== "granted") {
-                window.location.href = "./error";
+                document.body.innerHTML = '';
             }
         }
 
@@ -197,15 +197,15 @@
                     setTimeout(() => {
                         localStorage.setItem('cooldownComplete', 'true');
                         checkForUpdates();
-                        setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
-                    }, 10000); // 10-second cooldown
+                        setInterval(checkForUpdates, 5 * 60 * 1000);
+                    }, 10000);
                 } else {
-                    window.location.href = "./error";
+                    checkNotificationPermission();
                 }
             });
 
             if (localStorage.getItem('cooldownComplete')) {
-                setInterval(checkNotificationPermission, 500); // Check notification permission every 0.5 seconds
+                setInterval(checkNotificationPermission, 500);
             }
         });
     </script>
