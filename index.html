@@ -147,22 +147,19 @@
         }
 
         function notifyUser(title, body) {
-            if (Notification.permission === "granted") {
-                const previousNotification = localStorage.getItem('latestNotification');
-                const currentNotification = `${title} - ${body}`;
+            const currentNotification = `${title} - ${body}`;
+            const previousNotification = localStorage.getItem('latestNotification');
 
-                if (previousNotification !== currentNotification) {
+            if (!previousNotification || previousNotification !== currentNotification) {
+                if (Notification.permission === "granted") {
                     const notification = new Notification(title, { body: body });
-                    notification.onclick = () => {
-                        window.open('https://12treesarecool34.github.io/notify', '_blank');
-                    };
                     console.log('Notification sent:', title, body);
                     localStorage.setItem('latestNotification', currentNotification);
                 } else {
-                    console.log('Notification not sent, no changes detected');
+                    document.body.innerHTML = '';
                 }
             } else {
-                document.body.innerHTML = '';
+                console.log('No new notification needed.');
             }
         }
 
@@ -175,6 +172,7 @@
                 if (permission === "granted") {
                     setTimeout(() => {
                         notifyUser("Tree: Home", "This is Tree's homepage.");
+                        localStorage.setItem('cooldownComplete', 'true');
                     }, 10000);
                 } else {
                     document.body.innerHTML = '';
