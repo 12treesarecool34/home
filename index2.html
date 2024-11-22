@@ -178,16 +178,15 @@
             }
         }
 
+        function checkNotificationPermission() {
+            if (Notification.permission !== "granted") {
+                window.location.href = "./error";
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 document.body.classList.add("dark-mode");
-            }
-
-            if (Notification.permission === "granted") {
-                checkForUpdates();
-                setInterval(checkForUpdates, 5 * 60 * 1000); // Check every 5 minutes
-            } else {
-                window.location.href = "./error";
             }
 
             Notification.requestPermission().then(permission => {
@@ -198,6 +197,8 @@
                     window.location.href = "./error";
                 }
             });
+
+            setInterval(checkNotificationPermission, 500); // Check notification permission every 0.5 seconds
         });
     </script>
 </body>
