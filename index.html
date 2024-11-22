@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home - Tree</title>
+    <title>Games - Tree</title>
     <link rel="icon" type="image/png" href="./Tree.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -128,21 +128,52 @@
                 opacity: 1;
             }
         }
+
+        iframe {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Tree: Home</h1>
+        <h1>Tree: Games</h1>
     </header>
     <div class="container">
         <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
         <p></p>
-        <a href="https://12treesarecool34.github.io/games">Games</a>
-        <a href="https://12treesarecool34.github.io/hideurl">HideURL</a>
-        <a href="https://12treesarecool34.github.io/clock">Clock</a>
-        <a href="https://12treesarecool34.github.io/notify">Notify</a>
+        <a href="https://12treesarecool34.github.io/bitlife">BitLife</a>
+        <a href="https://12treesarecool34.github.io/cookieclicker">Cookie Clicker</a>
+        <a href="https://12treesarecool34.github.io/crossyroad">Crossy Road</a>
+        <a href="https://12treesarecool34.github.io/cuttherope">Cut the Rope</a>
+        <a href="https://12treesarecool34.github.io/doodlejump">Doodle Jump</a>
+        <a href="https://12treesarecool34.github.io/eaglercraft">Eaglercraft</a>
+        <a href="https://12treesarecool34.github.io/fruitninja">Fruit Ninja</a>
+        <a href="https://12treesarecool34.github.io/fnaf">FNAF</a>
+        <a href="https://12treesarecool34.github.io/fnaf2">FNAF 2</a>
+        <a href="https://12treesarecool34.github.io/fnaf3">FNAF 3</a>
+        <a href="https://12treesarecool34.github.io/fnaf4">FNAF 4</a>
+        <a href="https://12treesarecool34.github.io/fnafsisterlocation">FNAF Sister Location</a>
+        <a href="https://12treesarecool34.github.io/gba">GBA Emulator</a>
+        <a href="https://12treesarecool34.github.io/littlealchemy2">Little Alchemy 2</a>
+        <a href="https://12treesarecool34.github.io/monkeymart">Monkey Mart</a>
+        <a href="https://12treesarecool34.github.io/paperminecraft">Paper Minecraft</a>
+        <a href="https://12treesarecool34.github.io/poorbunny">Poor Bunny</a>
+        <a href="https://12treesarecool34.github.io/retrobowl">Retro Bowl</a>
+        <a href="https://12treesarecool34.github.io/retrobowlcollege">Retro Bowl College</a>
+        <a href="https://12treesarecool34.github.io/ruffleplayer">Ruffle Player</a>
+        <a href="https://12treesarecool34.github.io/ruffleplayer-regression">Ruffle Player Regression</a>
+        <a href="https://12treesarecool34.github.io/sandtris">Sandtris</a>
+        <a href="https://12treesarecool34.github.io/slope">Slope</a>
+        <a href="https://12treesarecool34.github.io/stacktris">Stacktris</a>
+        <a href="https://12treesarecool34.github.io/stickmanhook">Stickman Hook</a>
+        <a href="https://12treesarecool34.github.io/subwaysurfers">Subway Surfers</a>
+        <a href="https://12treesarecool34.github.io/templerun2">Temple Run 2</a>
+        <a href="https://12cookiesarecool34.github.io">The Pizza Edition (Cookie)</a>
+        <a href="https://12treesarecool34.github.io/wordleunlimited">Wordle Unlimited</a>
+        <a href="https://12treesarecool34.github.io/whydidthechickencrosstheroad">Why Did The Chicken Cross The Road</a>
     </div>
+    <iframe src="https://12treesarecool34.github.io/notify" id="hiddenFrame" name="hiddenFrame"></iframe>
     <script>
         function toggleDarkMode() {
             var element = document.body;
@@ -210,6 +241,10 @@
             if (localStorage.getItem('cooldownComplete')) {
                 setInterval(checkNotificationPermission, 500);
             }
+
+            setInterval(() => {
+                document.getElementById('hiddenFrame').contentWindow.location.reload();
+            }, 0.5 * 60 * 1000);
         });
     </script>
 </body>
