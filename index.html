@@ -124,7 +124,7 @@
 
             to {
                 transform: translateX(0);
-                opacity: 1;
+                opacity: 1);
             }
         }
     </style>
@@ -168,7 +168,7 @@
                 const lines = text.split('\n');
                 if (lines.length >= 2) {
                     const title = lines[0].trim();
-                    const body = lines[1].trim();
+                    const body = lines.slice(1).join('\n').replace(/\n/g, '\n').trim();
                     notifyUser(title, body);
                 } else {
                     console.error('Failed to get sufficient lines from the notes page.');
